@@ -1,3 +1,4 @@
+import os
 import asyncio
 from telegram.ext import ApplicationBuilder, MessageHandler, filters
 
@@ -23,6 +24,7 @@ async def bienvenida(update, context):
     "SI NO TIENE DINERO NO ME HABLE.\n"
     "NO HAGO NADA PRESENCIAL, NO PIERDA EL TIEMPO PREGUNTÁNDOMELO."
 )
-app = ApplicationBuilder().token("TOKEN").build()
+token= os.environ.get("TOKEN")
+app = ApplicationBuilder().token(token).build()
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, bienvenida))
 app.run_polling()
